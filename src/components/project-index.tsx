@@ -1,18 +1,30 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
 import { ProjectVisual } from "@/components/project-visual";
 import { projects } from "@/data/projects";
 import type { Lang } from "@/lib/i18n";
 import { copy, t } from "@/lib/i18n";
 
+const label = "font-[family-name:var(--mono)] text-[10px] tracking-[.1em] uppercase";
+
 export function ProjectIndex({ lang }: { lang: Lang }) {
-  const [active, setActive] = useState(0);
   const c = copy[lang];
-  return <div className="grid gap-12 lg:grid-cols-[1fr_.9fr] lg:gap-[6vw]">
-    <div className="order-2 border-t border-[#171b1a]/30 lg:order-1">{projects.map((project, index) => <Link key={project.slug} href={`/${lang}/projects/${project.slug}`} onMouseEnter={() => setActive(index)} onFocus={() => setActive(index)} className={`group grid grid-cols-[50px_1fr_auto] items-baseline gap-3 border-b border-[#171b1a]/25 py-[clamp(24px,2.8vw,44px)] transition-colors hover:text-[#aa4b31] sm:grid-cols-[70px_1fr_auto] ${active === index ? "text-[#aa4b31]" : ""}`}><span className="font-[family-name:var(--mono)] text-[11px]">0{index + 1}</span><span><strong className="block font-[family-name:var(--display)] text-[clamp(26px,3vw,48px)] font-medium leading-[1.03] tracking-[-.06em]">{project.title}</strong><small className="mt-2 block font-[family-name:var(--mono)] text-[10px] uppercase tracking-[.07em] text-[#6a716b]">{t(project.subtitle, lang)}</small></span><span className="text-[23px] font-light transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span></Link>)}</div>
-    <aside className="order-1 self-start lg:sticky lg:top-8 lg:order-2"><div className="group overflow-hidden"><ProjectVisual project={projects[active]} lang={lang} /></div><div className="mt-5 grid grid-cols-[70px_1fr] gap-4 border-t border-[#171b1a]/25 pt-4"><span className="font-[family-name:var(--mono)] text-[11px] text-[#aa4b31]">0{active + 1} / 06</span><div><h2 className="font-[family-name:var(--serif)] tracking-normal text-[clamp(25px,2.8vw,42px)] italic leading-[1.1]">{projects[active].title}</h2><p className="mt-3 max-w-[500px] text-[14px] leading-[1.65] text-[#626b63]">{t(projects[active].lead, lang)}</p><Link href={`/${lang}/projects/${projects[active].slug}`} className="mt-6 inline-flex items-center gap-3 border-b border-[#171b1a] pb-1 text-[13px] font-medium hover:text-[#aa4b31]">{c.viewCase} <span>↗</span></Link></div></div></aside>
+
+  return <div className="grid gap-x-8 gap-y-16 md:grid-cols-2 lg:gap-x-12 lg:gap-y-24">
+    {projects.map((project, index) => <article key={project.slug} className="group min-w-0">
+      <Link href={`/${lang}/projects/${project.slug}`} aria-label={`${c.viewCase}: ${project.title}`} className="block overflow-hidden bg-[#e9e9e4] transition-[transform,background-color] duration-500 ease-out hover:-translate-y-1 hover:bg-[#e3e4df] focus-visible:-translate-y-1 focus-visible:outline-offset-[-3px] motion-reduce:hover:translate-y-0">
+        <ProjectVisual project={project} lang={lang} />
+      </Link>
+      <div className="pt-6">
+        <div className={`flex items-center justify-between gap-4 text-[#878a92] ${label}`}><span>0{index + 1}</span><span>{project.category === "system" ? c.system : c.website}</span></div>
+        <h2 className="mt-4 font-[family-name:var(--display)] text-[clamp(26px,2.5vw,38px)] font-semibold leading-[1.08] text-[#17181c]"><Link href={`/${lang}/projects/${project.slug}`} className="transition-colors duration-200 hover:text-[#3157d5]">{project.title}</Link></h2>
+        <p className="mt-2 text-[14px] font-medium text-[#3157d5]">{t(project.subtitle, lang)}</p>
+        <p className="mt-4 max-w-[590px] text-[14px] leading-[1.75] text-[#646871] sm:text-[15px]">{t(project.lead, lang)}</p>
+        <div className="mt-5 flex flex-wrap gap-x-3 gap-y-1 font-[family-name:var(--mono)] text-[9px] uppercase tracking-[.06em] text-[#92959c]">{project.technology.length ? project.technology.slice(0, 5).map((item) => <span key={item}>{item}</span>) : <span>{lang === "en" ? "Public website" : "เว็บไซต์สาธารณะ"}</span>}</div>
+        <div className="mt-6 flex flex-wrap items-center gap-x-7 gap-y-3 text-[13px] font-semibold">
+          <Link href={`/${lang}/projects/${project.slug}`} className="group/case inline-flex items-center gap-2 text-[#17181c] transition-colors hover:text-[#3157d5]"><span>{c.viewCase}</span><span className="transition-transform group-hover/case:translate-x-1">→</span></Link>
+          {project.liveUrl ? <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="group/live inline-flex items-center gap-2 text-[#6d7078] transition-colors hover:text-[#3157d5]"><span>{c.visit}</span><span className="transition-transform group-hover/live:translate-x-1 group-hover/live:-translate-y-1">↗</span></a> : <span className="font-normal text-[#a0a2a8]">{c.noPublic}</span>}
+        </div>
+      </div>
+    </article>)}
   </div>;
 }
-

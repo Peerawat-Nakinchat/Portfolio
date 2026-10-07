@@ -4,7 +4,6 @@ import { copy } from "@/lib/i18n";
 
 export function SiteHeader({ lang, alternatePath = "" }: { lang: Lang; alternatePath?: string }) {
   const c = copy[lang];
-  const other = lang === "en" ? "th" : "en";
   const nav = [
     { label: c.navWork, href: `/${lang}/projects` },
     { label: c.navExperience, href: `/${lang}#experience` },
@@ -14,27 +13,26 @@ export function SiteHeader({ lang, alternatePath = "" }: { lang: Lang; alternate
   ];
 
   return <>
-    <a href="#main" className="absolute -top-24 left-4 z-[100] bg-[#f36b43] px-4 py-3 text-[#171b1a] focus:top-3">{c.skip}</a>
-    <header className="relative z-40 bg-[#171b1a] text-[#f2f0e9]">
-      <div className="mx-auto flex h-[76px] w-[calc(100%-48px)] max-w-[1480px] items-center justify-between border-b border-white/20 sm:w-[calc(100%-80px)]">
-        <Link href={`/${lang}`} className="group flex items-baseline gap-3" aria-label="Peerawat Nakinchat home">
-          <span className="font-[family-name:var(--display)] text-[27px] font-semibold leading-none tracking-[-.09em]">P<span className="text-[#f36b43]">.</span>N</span>
-          <span className="hidden font-[family-name:var(--mono)] text-[10px] tracking-[.08em] text-white/55 lg:inline">PEERAWAT NAKINCHAT</span>
+    <a href="#main" className="fixed -top-20 left-5 z-[100] bg-[#3157d5] px-4 py-3 text-[13px] font-semibold text-white focus:top-4">{c.skip}</a>
+    <header className="sticky top-0 z-50 bg-[#f7f7f5]/90 text-[#17181c] backdrop-blur-xl print:hidden">
+      <div className="mx-auto flex h-16 w-[calc(100%-40px)] max-w-[1200px] items-center justify-between sm:w-[calc(100%-72px)]">
+        <Link href={`/${lang}`} className="group inline-flex items-center gap-2 font-[family-name:var(--display)] text-[15px] font-semibold tracking-[-.02em]" aria-label="Peerawat Nakinchat home">
+          <span>Peerawat Nakinchat</span><span className="size-1.5 rounded-full bg-[#3157d5] transition-transform duration-300 group-hover:scale-[1.8]" />
         </Link>
-
-        <nav className="hidden items-center gap-[clamp(22px,2.6vw,44px)] md:flex" aria-label="Primary navigation">
-          {nav.map((item, index) => <Link key={item.href} href={item.href} className="group relative py-2 text-[13px] font-medium transition-colors hover:text-[#f36b43]"><span className="mr-1.5 align-top font-[family-name:var(--mono)] text-[9px] text-white/45">0{index + 1}</span>{item.label}<span className="absolute right-0 bottom-0 left-0 h-px origin-left scale-x-0 bg-[#f36b43] transition-transform group-hover:scale-x-100" /></Link>)}
+        <nav className="hidden items-center gap-7 md:flex" aria-label="Primary navigation">
+          {nav.map((item) => <Link key={item.href} href={item.href} className="relative py-2 text-[12px] font-medium text-[#666a73] transition-colors after:absolute after:right-0 after:bottom-0 after:left-0 after:h-px after:origin-left after:scale-x-0 after:bg-[#3157d5] after:transition-transform hover:text-[#17181c] hover:after:scale-x-100">{item.label}</Link>)}
         </nav>
-
         <div className="flex items-center gap-5">
-          <Link href={`/${other}${alternatePath}`} hrefLang={other} className="font-[family-name:var(--mono)] text-[11px] tracking-[.08em] transition-colors hover:text-[#f36b43]" aria-label={lang === "en" ? "Read in Thai" : "Read in English"}>{lang === "en" ? "TH" : "EN"}<span className="ml-1.5 text-[#f36b43]">↗</span></Link>
+          <div className="flex items-center rounded-full bg-[#e9eae6] p-0.5 font-[family-name:var(--mono)] text-[9px] tracking-[.08em]" role="group" aria-label={lang === "en" ? "Language" : "ภาษา"}>
+            <Link href={`/th${alternatePath}`} hrefLang="th" aria-current={lang === "th" ? "page" : undefined} className={`rounded-full px-2.5 py-1.5 transition-[background-color,color,box-shadow] duration-200 ${lang === "th" ? "bg-white text-[#17181c] shadow-[0_1px_4px_rgba(23,24,28,.10)]" : "text-[#8b8e94] hover:text-[#17181c]"}`}>TH</Link>
+            <Link href={`/en${alternatePath}`} hrefLang="en" aria-current={lang === "en" ? "page" : undefined} className={`rounded-full px-2.5 py-1.5 transition-[background-color,color,box-shadow] duration-200 ${lang === "en" ? "bg-white text-[#17181c] shadow-[0_1px_4px_rgba(23,24,28,.10)]" : "text-[#8b8e94] hover:text-[#17181c]"}`}>EN</Link>
+          </div>
           <details className="group relative md:hidden">
-            <summary className="flex cursor-pointer list-none items-center gap-2 font-[family-name:var(--mono)] text-[11px] tracking-[.08em] [&::-webkit-details-marker]:hidden"><span>{lang === "en" ? "MENU" : "เมนู"}</span><span className="text-[#f36b43] group-open:rotate-45">+</span></summary>
-            <nav className="absolute top-[37px] right-0 z-50 w-[min(300px,calc(100vw-48px))] border border-white/20 bg-[#171b1a] p-5 shadow-xl" aria-label="Mobile navigation">{nav.map((item, index) => <Link key={item.href} href={item.href} className="flex items-center gap-4 border-b border-white/15 py-3 text-[16px] last:border-0"><span className="font-[family-name:var(--mono)] text-[10px] text-[#f36b43]">0{index + 1}</span>{item.label}</Link>)}</nav>
+            <summary className="flex size-9 cursor-pointer list-none items-center justify-center text-[20px] text-[#17181c] [&::-webkit-details-marker]:hidden"><span className="transition-transform duration-200 group-open:rotate-45">+</span></summary>
+            <nav className="absolute top-11 right-0 z-50 w-[min(280px,calc(100vw-40px))] bg-[#17181c] p-3 text-white shadow-[0_24px_60px_rgba(23,25,31,.22)]" aria-label="Mobile navigation">{nav.map((item) => <Link key={item.href} href={item.href} className="group/item flex items-center justify-between px-4 py-3.5 text-[14px] text-white/70 transition-colors hover:bg-white/[.06] hover:text-white"><span>{item.label}</span><span className="text-[#7895ff] transition-transform group-hover/item:translate-x-1">→</span></Link>)}</nav>
           </details>
         </div>
       </div>
     </header>
   </>;
 }
-

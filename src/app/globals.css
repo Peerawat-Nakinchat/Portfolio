@@ -1,1 +1,21 @@
 @import "tailwindcss";
+
+html {
+  text-rendering: optimizeLegibility;
+  --display: "Space Grotesk Variable", "Noto Sans Thai", sans-serif;
+  --serif: "Noto Sans Thai", sans-serif;
+  --body: "Noto Sans Thai", sans-serif;
+  --mono: "IBM Plex Mono", "Noto Sans Thai", monospace;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.025em !important;
+}
+
+[lang="th"] h1,
+[lang="th"] h2,
+[lang="th"] h3 {
+  letter-spacing: -0.02em !important;
+}

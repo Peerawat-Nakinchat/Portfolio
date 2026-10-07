@@ -3,41 +3,64 @@ import type { Project } from "@/data/projects";
 import type { Lang } from "@/lib/i18n";
 import { t } from "@/lib/i18n";
 
-const frame = "relative isolate flex aspect-[1.35] w-full flex-col overflow-hidden p-[clamp(24px,3vw,48px)] sm:aspect-[1.58]";
-const largeFrame = "relative isolate flex aspect-[1.13] w-full flex-col overflow-hidden p-[clamp(24px,5vw,72px)] sm:aspect-[1.9]";
-const smallLabel = "font-[family-name:var(--mono)] text-[10px] leading-[1.5] tracking-[.09em] uppercase sm:text-[11px]";
+const caption = "font-[family-name:var(--mono)] text-[7px] tracking-[.08em] uppercase sm:text-[9px]";
+const micro = "text-[7px] leading-[1.35] sm:text-[9px]";
+
+function Chrome({ title }: { title: string }) {
+  return <div className="flex h-7 items-center gap-2 bg-[#f2f2ef] px-3 sm:h-9 sm:px-4">
+    <div className="flex gap-1"><span className="size-1.5 rounded-full bg-[#d3d3cf]" /><span className="size-1.5 rounded-full bg-[#d3d3cf]" /><span className="size-1.5 rounded-full bg-[#d3d3cf]" /></div>
+    <span className={`ml-1 text-[#969690] ${caption}`}>{title}</span>
+  </div>;
+}
+
+function HrInterface({ lang }: { lang: Lang }) {
+  return (
+    <div className="absolute inset-0 overflow-hidden bg-white">
+      <Image src="/images/hop-chafe-hr-ui.jpg" alt={lang === "en" ? "HOP Chafe HR recruitment dashboard" : "หน้าแดชบอร์ดระบบสรรหาบุคลากร HOP Chafe HR"} fill sizes="(max-width: 768px) 100vw, 90vw" className="object-cover object-left transition-transform duration-700 ease-out group-hover:scale-[1.02]" />
+      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-black/55 px-5 py-4 text-white backdrop-blur-sm sm:px-7"><span className={caption}>HOP CHAFE HR</span><span className={caption}>{lang === "en" ? "ACTUAL INTERFACE" : "หน้าระบบจริง"}</span></div>
+    </div>
+  );
+}
+
+function MemberInterface({ lang }: { lang: Lang }) {
+  return (
+    <div className="absolute inset-0 overflow-hidden bg-[#eef0f6]">
+      <div className="absolute inset-0 right-[18%] overflow-hidden"><Image src="/images/niconico-member-login.jpg" alt={lang === "en" ? "NICONICO Member login interface" : "หน้าล็อกอินระบบสมาชิก NICONICO"} fill sizes="(max-width: 768px) 80vw, 72vw" className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.02]" /></div>
+      <div className="absolute top-[2%] right-[1%] h-[96%] w-[31%] drop-shadow-[0_20px_30px_rgba(20,29,59,.24)] transition-transform duration-700 ease-out group-hover:-translate-y-1"><Image src="/images/niconico-member-mobile.png" alt={lang === "en" ? "NICONICO rewards interface on mobile" : "หน้ารางวัลของระบบสมาชิก NICONICO บนมือถือ"} fill sizes="(max-width: 768px) 30vw, 26vw" className="object-contain object-right" /></div>
+      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-black/55 px-5 py-4 text-white backdrop-blur-sm sm:px-7"><span className={caption}>NICONICO MEMBER</span><span className={caption}>{lang === "en" ? "ACTUAL INTERFACES" : "หน้าระบบจริง"}</span></div>
+    </div>
+  );
+}
+
+function CareerInterface({ lang }: { lang: Lang }) {
+  return (
+    <div className="absolute inset-0 overflow-hidden bg-white">
+      <Image src="/images/niconico-career-ui.jpg" alt={lang === "en" ? "NICONICO career website interface" : "หน้าเว็บไซต์ร่วมงานกับ NICONICO"} fill sizes="(max-width: 768px) 100vw, 90vw" className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.02]" />
+      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-black/55 px-5 py-4 text-white backdrop-blur-sm sm:px-7"><span className={caption}>NICONICO CAREER</span><span className={caption}>{lang === "en" ? "ACTUAL INTERFACE" : "หน้าระบบจริง"}</span></div>
+    </div>
+  );
+}
+
+function SupportInterface({ lang }: { lang: Lang }) {
+  return <div className="absolute inset-[7%] overflow-hidden bg-white shadow-[0_22px_60px_rgba(27,44,33,.12)]">
+    <Chrome title="INTERNAL / IT SUPPORT" />
+    <div className="grid h-[calc(100%-1.75rem)] grid-cols-[20%_1fr] sm:h-[calc(100%-2.25rem)]"><aside className="bg-[#e1e9de] p-2 sm:p-4"><strong className={`text-[#31513a] ${micro}`}>IT SUPPORT</strong><div className={`mt-5 space-y-2 text-[#66806b] ${caption}`}><p className="font-medium text-[#31513a]">Requests</p><p>Approvals</p><p>Assets</p><p>Reports</p></div></aside><div className="bg-[#f6f7f4] p-3 sm:p-5"><div className="flex items-start justify-between"><div><p className={`text-[#949892] ${caption}`}>SERVICE DESK</p><h3 className="mt-1 text-[10px] font-semibold text-[#263029] sm:text-[15px]">{lang === "en" ? "Support requests" : "รายการแจ้งปัญหา"}</h3></div><span className={`bg-[#dfe9dc] px-2 py-1 text-[#45634c] ${caption}`}>ISO FLOW</span></div><div className="mt-4 grid grid-cols-[1fr_20%_20%] gap-2 bg-white p-2 sm:mt-6 sm:p-3"><span className={`text-[#989c97] ${caption}`}>REQUEST</span><span className={`text-[#989c97] ${caption}`}>STATUS</span><span className={`text-[#989c97] ${caption}`}>OWNER</span>{[["Email access", "In progress", "IT-01"], ["Printer issue", "Review", "IT-02"], ["New device", "Approved", "IT-01"], ["VPN request", "Pending", "IT-03"]].flatMap((row) => row.map((cell, index) => <span key={`${row[0]}-${cell}`} className={`truncate py-1 ${index === 1 ? "text-[#427150]" : "text-[#4c514d]"} ${micro}`}>{cell}</span>))}</div></div></div>
+  </div>;
+}
 
 export function ProjectVisual({ project, lang, large = false }: { project: Project; lang: Lang; large?: boolean }) {
-  const base = large ? largeFrame : frame;
+  const frame = large ? "relative aspect-[1.05] overflow-hidden bg-[#e7e7e2] sm:aspect-[1.72]" : "relative aspect-[1.22] overflow-hidden bg-[#e7e7e2] sm:aspect-[1.48]";
+  const imagePosition = project.slug === "alangkan-thai" ? "object-left" : "object-center";
 
-  if (project.image) return <div className={`${base} bg-[#a4a9a3] p-0`}>
-    <Image src={project.image} alt={t(project.imageAlt!, lang)} fill sizes={large ? "(max-width: 768px) 100vw, 90vw" : "(max-width: 768px) 100vw, 60vw"} loading={large ? "eager" : "lazy"} className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]" />
-    <div className="relative z-10 mt-auto flex items-center justify-between bg-[#171b1a] px-5 py-4 text-[#f2f0e9] sm:px-8"><span className={smallLabel}>{project.title}</span><span className={smallLabel}>LIVE WEBSITE ↗</span></div>
+  if (project.image) return <div className={frame}>
+    <Image src={project.image} alt={t(project.imageAlt!, lang)} fill sizes={large ? "(max-width: 768px) 100vw, 90vw" : "(max-width: 768px) 100vw, 50vw"} loading={large ? "eager" : "lazy"} className={`object-cover ${imagePosition} transition-transform duration-700 ease-out group-hover:scale-[1.02]`} />
+    <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-black/55 px-5 py-4 text-white backdrop-blur-sm sm:px-7"><span className={caption}>{project.title}</span><span className={caption}>{lang === "en" ? "PUBLIC WEBSITE" : "เว็บไซต์สาธารณะ"}</span></div>
   </div>;
 
-  if (project.visual === "pipeline") return <div className={`${base} justify-between bg-[#cbd3c7] text-[#18221e]`} role="img" aria-label="Conceptual recruitment workflow: candidate, interview, evaluation, offer, hire">
-    <div className={`flex justify-between border-b border-[#18221e]/30 pb-4 ${smallLabel}`}><span>HOP CHAFE / RECRUITMENT</span><span>01 — 05</span></div>
-    <div className="flex items-end justify-between gap-6 py-6"><p className="font-[family-name:var(--serif)] tracking-normal text-[clamp(43px,5.2vw,96px)] leading-[.95] italic">From first<br />conversation<br />to first day.</p><span className="hidden font-[family-name:var(--mono)] text-[11px] text-[#18221e]/55 md:block">A CONNECTED HIRING WORKFLOW<br />CONCEPTUAL SYSTEM MAP</span></div>
-    <div className="grid grid-cols-5 gap-1 border-t border-[#18221e]/35 pt-4 sm:gap-4">{["Candidate", "Interview", "Evaluation", "Offer", "Hire"].map((step, index) => <div key={step} className="min-w-0"><span className={`${smallLabel} text-[#ab4d31]`}>0{index + 1}</span><div className="mt-2 h-[2px] bg-[#18221e]/45" /><span className="mt-3 block truncate text-[clamp(8px,.9vw,13px)] font-medium">{step}</span></div>)}</div>
-  </div>;
-
-  if (project.visual === "flow") return <div className={`${base} justify-between bg-[#d9c5ad] text-[#292a24]`} role="img" aria-label="Conceptual connection: browser to Next.js to server-side API proxy to ERP">
-    <div className={`flex justify-between border-b border-[#292a24]/30 pb-4 ${smallLabel}`}><span>NICONICO / MEMBER</span><span>02 — 04</span></div>
-    <div className="flex items-end justify-between gap-3 py-5"><p className="font-[family-name:var(--display)] text-[clamp(36px,4.5vw,84px)] font-medium leading-[.92] tracking-[-.075em]">A useful account.<br /><span className="font-[family-name:var(--serif)] tracking-normal font-normal italic text-[#a9482f]">A protected edge.</span></p><span className="hidden text-[clamp(70px,10vw,165px)] font-light leading-none text-[#292a24]/15 sm:block">↗</span></div>
-    <div className="grid grid-cols-[repeat(7,minmax(0,1fr))] items-center border-t border-[#292a24]/35 pt-5 font-[family-name:var(--mono)] text-[clamp(8px,.9vw,13px)]"><span>Browser</span><span className="text-center text-[#a9482f]">→</span><span>Next.js</span><span className="text-center text-[#a9482f]">→</span><span>API proxy</span><span className="text-center text-[#a9482f]">→</span><span>ERP</span></div>
-  </div>;
-
-  if (project.visual === "career") return <div className={`${base} justify-between bg-[#e2ded3] text-[#202524]`} role="img" aria-label="NICONICO Career editorial project visual">
-    <div className={`flex justify-between border-b border-[#202524]/30 pb-4 ${smallLabel}`}><span>NICONICO / CAREER</span><span>03 / PUBLIC PLATFORM</span></div>
-    <div className="flex items-end justify-between gap-5"><p className="font-[family-name:var(--display)] text-[clamp(45px,7vw,120px)] font-medium leading-[.82] tracking-[-.09em]">The next<br /><span className="font-[family-name:var(--serif)] tracking-normal font-normal italic text-[#a9482f]">chapter.</span></p><span className="mb-1 text-[clamp(48px,6vw,100px)] font-light leading-none">↗</span></div>
-    <div className={`border-t border-[#202524]/30 pt-4 ${smallLabel}`}>CAREER PLATFORM / VISIT THE LIVE PRODUCT</div>
-  </div>;
-
-  return <div className={`${base} justify-between bg-[#c7c9bd] text-[#1b2420]`} role="img" aria-label="Conceptual MVC and service layer diagram">
-    <div className={`flex justify-between border-b border-[#1b2420]/30 pb-4 ${smallLabel}`}><span>MANGO CONSULTANT / INTERNAL SYSTEM</span><span>06 / SOFTWARE</span></div>
-    <p className="font-[family-name:var(--serif)] tracking-normal text-[clamp(42px,6vw,112px)] leading-[.96] italic">Support needs<br />structure.</p>
-    <div className="flex flex-wrap gap-2 border-t border-[#1b2420]/35 pt-4 font-[family-name:var(--mono)] text-[10px] uppercase sm:text-[12px]"><span>01 / Interface</span><span className="mx-2 text-[#a9482f]">→</span><span>02 / Controller</span><span className="mx-2 text-[#a9482f]">→</span><span>03 / Service layer</span></div>
-  </div>;
+  if (project.visual === "pipeline") return <div className={`${frame} bg-[#e5e8eb]`}><HrInterface lang={lang} /></div>;
+  if (project.visual === "flow") return <div className={`${frame} bg-[#dfe3eb]`}><MemberInterface lang={lang} /></div>;
+  if (project.visual === "career") return <div className={`${frame} bg-[#e5e8eb]`}><CareerInterface lang={lang} /></div>;
+  return <div className={`${frame} bg-[#dfe6dc]`}><SupportInterface lang={lang} /><span className={`absolute right-3 bottom-2 text-[#687568] ${caption}`}>{lang === "en" ? "INTERFACE RECONSTRUCTION" : "ภาพจำลองจากโครงสร้างจริง"}</span></div>;
 }
 
 
