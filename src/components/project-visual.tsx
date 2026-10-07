@@ -3,8 +3,8 @@ import type { Project } from "@/data/projects";
 import type { Lang } from "@/lib/i18n";
 import { t } from "@/lib/i18n";
 
-const caption = "font-[family-name:var(--mono)] text-[7px] tracking-[.08em] uppercase sm:text-[9px]";
-const micro = "text-[7px] leading-[1.35] sm:text-[9px]";
+const caption = "font-[family-name:var(--mono)] text-[9px] tracking-[.07em] uppercase sm:text-[10px]";
+const micro = "text-[9px] leading-[1.4] sm:text-[10px]";
 
 function Chrome({ title }: { title: string }) {
   return <div className="flex h-7 items-center gap-2 bg-[#f2f2ef] px-3 sm:h-9 sm:px-4">
@@ -13,29 +13,29 @@ function Chrome({ title }: { title: string }) {
   </div>;
 }
 
-function HrInterface({ lang }: { lang: Lang }) {
+function HrInterface({ lang, priority = false }: { lang: Lang; priority?: boolean }) {
   return (
     <div className="absolute inset-0 overflow-hidden bg-white">
-      <Image src="/images/hop-chafe-hr-ui.jpg" alt={lang === "en" ? "HOP Chafe HR recruitment dashboard" : "หน้าแดชบอร์ดระบบสรรหาบุคลากร HOP Chafe HR"} fill sizes="(max-width: 768px) 100vw, 90vw" className="object-cover object-left transition-transform duration-700 ease-out group-hover:scale-[1.02]" />
+      <Image src="/images/hop-chafe-hr-ui.jpg" alt={lang === "en" ? "HOP Chafe HR recruitment dashboard" : "หน้าแดชบอร์ดระบบสรรหาบุคลากร HOP Chafe HR"} fill sizes="(max-width: 768px) 100vw, 90vw" priority={priority} className="object-cover object-left transition-transform duration-700 ease-out group-hover:scale-[1.02]" />
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-black/55 px-5 py-4 text-white backdrop-blur-sm sm:px-7"><span className={caption}>HOP CHAFE HR</span><span className={caption}>{lang === "en" ? "ACTUAL INTERFACE" : "หน้าระบบจริง"}</span></div>
     </div>
   );
 }
 
-function MemberInterface({ lang }: { lang: Lang }) {
+function MemberInterface({ lang, priority = false }: { lang: Lang; priority?: boolean }) {
   return (
     <div className="absolute inset-0 overflow-hidden bg-[#eef0f6]">
-      <div className="absolute inset-0 right-[18%] overflow-hidden"><Image src="/images/niconico-member-login.jpg" alt={lang === "en" ? "NICONICO Member login interface" : "หน้าล็อกอินระบบสมาชิก NICONICO"} fill sizes="(max-width: 768px) 80vw, 72vw" className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.02]" /></div>
-      <div className="absolute top-[2%] right-[1%] h-[96%] w-[31%] drop-shadow-[0_20px_30px_rgba(20,29,59,.24)] transition-transform duration-700 ease-out group-hover:-translate-y-1"><Image src="/images/niconico-member-mobile.png" alt={lang === "en" ? "NICONICO rewards interface on mobile" : "หน้ารางวัลของระบบสมาชิก NICONICO บนมือถือ"} fill sizes="(max-width: 768px) 30vw, 26vw" className="object-contain object-right" /></div>
+      <div className="absolute inset-0 right-[18%] overflow-hidden"><Image src="/images/niconico-member-login.jpg" alt={lang === "en" ? "NICONICO Member login interface" : "หน้าล็อกอินระบบสมาชิก NICONICO"} fill sizes="(max-width: 768px) 80vw, 72vw" priority={priority} className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.02]" /></div>
+      <div className="absolute top-[2%] right-[1%] h-[96%] w-[31%] drop-shadow-[0_20px_30px_rgba(20,29,59,.24)] transition-transform duration-700 ease-out group-hover:-translate-y-1"><Image src="/images/niconico-member-mobile.png" alt={lang === "en" ? "NICONICO rewards interface on mobile" : "หน้ารางวัลของระบบสมาชิก NICONICO บนมือถือ"} fill sizes="(max-width: 768px) 30vw, 26vw" priority={priority} className="object-contain object-right" /></div>
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-black/55 px-5 py-4 text-white backdrop-blur-sm sm:px-7"><span className={caption}>NICONICO MEMBER</span><span className={caption}>{lang === "en" ? "ACTUAL INTERFACES" : "หน้าระบบจริง"}</span></div>
     </div>
   );
 }
 
-function CareerInterface({ lang }: { lang: Lang }) {
+function CareerInterface({ lang, priority = false }: { lang: Lang; priority?: boolean }) {
   return (
     <div className="absolute inset-0 overflow-hidden bg-white">
-      <Image src="/images/niconico-career-ui.jpg" alt={lang === "en" ? "NICONICO career website interface" : "หน้าเว็บไซต์ร่วมงานกับ NICONICO"} fill sizes="(max-width: 768px) 100vw, 90vw" className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.02]" />
+      <Image src="/images/niconico-career-ui.jpg" alt={lang === "en" ? "NICONICO career website interface" : "หน้าเว็บไซต์ร่วมงานกับ NICONICO"} fill sizes="(max-width: 768px) 100vw, 90vw" priority={priority} className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.02]" />
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-black/55 px-5 py-4 text-white backdrop-blur-sm sm:px-7"><span className={caption}>NICONICO CAREER</span><span className={caption}>{lang === "en" ? "ACTUAL INTERFACE" : "หน้าระบบจริง"}</span></div>
     </div>
   );
@@ -53,13 +53,13 @@ export function ProjectVisual({ project, lang, large = false }: { project: Proje
   const imagePosition = project.slug === "alangkan-thai" ? "object-left" : "object-center";
 
   if (project.image) return <div className={frame}>
-    <Image src={project.image} alt={t(project.imageAlt!, lang)} fill sizes={large ? "(max-width: 768px) 100vw, 90vw" : "(max-width: 768px) 100vw, 50vw"} loading={large ? "eager" : "lazy"} className={`object-cover ${imagePosition} transition-transform duration-700 ease-out group-hover:scale-[1.02]`} />
+    <Image src={project.image} alt={t(project.imageAlt!, lang)} fill sizes={large ? "(max-width: 768px) 100vw, 90vw" : "(max-width: 768px) 100vw, 50vw"} priority={large} className={`object-cover ${imagePosition} transition-transform duration-700 ease-out group-hover:scale-[1.02]`} />
     <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-black/55 px-5 py-4 text-white backdrop-blur-sm sm:px-7"><span className={caption}>{project.title}</span><span className={caption}>{lang === "en" ? "PUBLIC WEBSITE" : "เว็บไซต์สาธารณะ"}</span></div>
   </div>;
 
-  if (project.visual === "pipeline") return <div className={`${frame} bg-[#e5e8eb]`}><HrInterface lang={lang} /></div>;
-  if (project.visual === "flow") return <div className={`${frame} bg-[#dfe3eb]`}><MemberInterface lang={lang} /></div>;
-  if (project.visual === "career") return <div className={`${frame} bg-[#e5e8eb]`}><CareerInterface lang={lang} /></div>;
+  if (project.visual === "pipeline") return <div className={`${frame} bg-[#e5e8eb]`}><HrInterface lang={lang} priority={large} /></div>;
+  if (project.visual === "flow") return <div className={`${frame} bg-[#dfe3eb]`}><MemberInterface lang={lang} priority={large} /></div>;
+  if (project.visual === "career") return <div className={`${frame} bg-[#e5e8eb]`}><CareerInterface lang={lang} priority={large} /></div>;
   return <div className={`${frame} bg-[#dfe6dc]`}><SupportInterface lang={lang} /><span className={`absolute right-3 bottom-2 text-[#687568] ${caption}`}>{lang === "en" ? "INTERFACE RECONSTRUCTION" : "ภาพจำลองจากโครงสร้างจริง"}</span></div>;
 }
 

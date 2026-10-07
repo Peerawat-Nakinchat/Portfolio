@@ -18,10 +18,10 @@ export default async function ProjectsPage({ params }: { params: Promise<{ lang:
   return <><SiteHeader lang={lang} alternatePath="/projects" /><main id="main" className="bg-[#f7f7f5]">
     <section className="mx-auto w-[calc(100%-40px)] max-w-[1200px] pt-20 pb-28 sm:w-[calc(100%-72px)] sm:pt-28 sm:pb-40">
       <header className="mb-16 sm:mb-20">
-        <p className="font-[family-name:var(--mono)] text-[10px] tracking-[.1em] text-[#3157d5] uppercase">{lang === "en" ? "SELECTED WORK" : "ผลงานทั้งหมด"}</p>
+        <p className="type-label text-[#3157d5]">{lang === "en" ? "SELECTED WORK" : "ผลงานทั้งหมด"}</p>
         <div className="mt-7 grid gap-7 lg:grid-cols-[1fr_420px] lg:items-end lg:gap-20">
-          <h1 className="font-[family-name:var(--display)] text-[clamp(40px,5vw,66px)] font-semibold leading-[1.02] tracking-[-.04em] text-[#17181c]">{lang === "en" ? "Products built for real use." : "ผลงานจากการใช้งานจริง"}</h1>
-          <p className="text-[15px] leading-[1.8] text-[#646871] sm:text-[16px]">{lang === "en" ? "Systems for recruitment, members, ERP integration, internal support, and public-facing websites. Each case study explains what the product does and how I worked on it." : "รวมระบบสรรหา ระบบสมาชิก การเชื่อม ERP ระบบสนับสนุนภายใน และเว็บไซต์สาธารณะ แต่ละกรณีศึกษาจะอธิบายว่าระบบทำอะไรและผมทำงานกับมันอย่างไร"}</p>
+          <h1 className="type-page-title text-[#17181c]">{lang === "en" ? "Products built for real use." : "ผลงานจากการใช้งานจริง"}</h1>
+          <p className="type-lead text-[#646871]">{lang === "en" ? "Systems for recruitment, members, ERP integration, internal support, and public-facing websites. Each case study explains what the product does and how I worked on it." : "รวมระบบสรรหา ระบบสมาชิก การเชื่อม ERP ระบบสนับสนุนภายใน และเว็บไซต์สาธารณะ แต่ละกรณีศึกษาจะอธิบายว่าระบบทำอะไรและผมทำงานกับมันอย่างไร"}</p>
         </div>
       </header>
       <ProjectIndex lang={lang} />

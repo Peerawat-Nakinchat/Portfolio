@@ -1,12 +1,22 @@
-export const profile: { name: string; email: string; github: string; linkedin: string; resumePdf: string } = {
+export const profile: { name: string; email: string; facebook: string; github: string; linkedin: string; resumePdf: string } = {
   name: "Peerawat Nakinchat",
-  email: "",
+  email: "minlovely2547@gmail.com",
+  facebook: "https://www.facebook.com/share/1CZvhVGeAv/",
   github: "https://github.com/Peerawat-Nakinchat",
   linkedin: "",
   resumePdf: "",
 };
 
 export const experience = [
+  {
+    company: "HOP Chafe",
+    role: { en: "Full-stack Developer · Contract", th: "นักพัฒนา Full-stack · สัญญาจ้าง" },
+    dates: { en: "3-month contract", th: "สัญญาจ้าง 3 เดือน" },
+    description: {
+      en: "Developed both the frontend and backend of a recruitment management system used across three companies. Built multi-tenant workflows covering job openings, applicant screening, interviews, offers, onboarding, and employee data transfer to ERP.",
+      th: "พัฒนาทั้ง Frontend และ Backend ของระบบ Recruitment Management ที่ใช้งานร่วมกัน 3 บริษัท ออกแบบให้รองรับ Multi-tenant ตั้งแต่เปิดตำแหน่ง รับสมัคร คัดกรอง สัมภาษณ์ ออกข้อเสนอ รับเข้าทำงาน และส่งข้อมูลพนักงานต่อไปยัง ERP"
+    }
+  },
   {
     company: "Mango Consultant",
     role: { en: "Software Developer Intern", th: "นักพัฒนาซอฟต์แวร์ฝึกงาน" },
